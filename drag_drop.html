@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Drag and Drop & internet status</title> 
+	<script>
+	function allow_drop(event) 
+	{
+		event.preventDefault();
+	}
+
+	function drag_start(event) 
+	{
+		event.dataTransfer.setData("text", event.target.id);
+	}
+
+	function drag_drop(event) {
+		event.preventDefault();
+		var data = event.dataTransfer.getData("text");
+		event.target.appendChild(document.getElementById(data));
+	}
+	</script>
+	<style>
+		.div 
+		{
+			width: 300px;
+			height: 300px;
+			padding: 10px;
+			border: 1px solid black;
+			background-color: #F5F5F5;
+		}
+	</style>
+</head>
+
+<body align = "center">	
+<p>Image Drag and Drop in boxes</p>
+	<div style="float:left;" align="center" class="div" ondrop="drag_drop(event)" ondragover="allow_drop(event)">
+	<img id="drag" src="https://wallpaperaccess.com/full/3239444.jpg" draggable="true"	ondragstart="drag_start(event)" width="275" height="275">
+	</div>
+	<div style="float:right;" class="div" ondrop="drag_drop(event)" ondragover="allow_drop(event)"> </div>
+	<script type="text/javascript">
+		status = setInterval(isOnline, 2000);
+		function isOnline() 
+		{
+			if (!navigator.onLine) 
+			{
+				alert("Offline");
+			}
+		}
+	</script>
+</body>
+</html>
